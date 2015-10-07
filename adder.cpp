@@ -1,46 +1,7 @@
 #include <iostream>
 #include <stdio.h>  
+#include "adder.h"
 using namespace std;
-
-class Adder {
-	bool sum, carry;
-
-public:
-	Adder (bool, bool);
-	Adder (bool, bool, bool);
-	bool GetSum() {return sum;}
-	bool GetCarry() {return carry;}
-
-private:
-	void FindHalfAdder (bool a, bool b){
-			this->sum = a ^ b;
-			this->carry = a & b;
-	}
-
-	void FindFullAdder (bool a, bool b, bool c){
-		bool s_ha1, c_ha1, s_ha2, c_ha2;
-
-		//Find the first Half adder 
-		this-> FindHalfAdder (b,c);
-		//s_ha1 = this-> GetSum();
-		c_ha1 = this-> GetCarry();
-
-		//Find the second Half adder 
-		this-> FindHalfAdder (a,this-> GetSum());
-		c_ha2 = this-> GetCarry();
-
-		this->sum = this-> GetSum();
-		this->carry = c_ha1 || c_ha2;
-	}
-};
-
-Adder :: Adder (bool a, bool b){
-	this-> FindHalfAdder (a, b);
-}
-
-Adder :: Adder (bool a, bool b, bool c){
-	this-> FindFullAdder (a, b, c);
-}
 
 int main()
 {
@@ -55,11 +16,11 @@ int main()
 
 		if (toupper(adderType) == 'H' || toupper(adderType) == 'F'){
 			if (toupper(adderType) == 'H'){
-				cout<< "Please Enter input (a b): ";
+				cout<< "Please enter input (a b): ";
 				cin>> a >> b;
 			}
 			else if (toupper(adderType) == 'F'){
-				cout<< "Please Enter input (a b c): ";
+				cout<< "Please enter input (a b c): ";
 				cin>> a >> b >> c;
 			}
 
